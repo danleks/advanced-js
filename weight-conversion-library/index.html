@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Convert Weight Library</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<style type="text/css">
+			body {
+				margin: 0 auto;
+				max-width: 40em;
+				width: 88%;
+			}
+		</style>
+	</head>
+	<body>
+
+		<h1>Convert Weight Library</h1>
+
+		<p>All of the magic here happens in the console.</p>
+
+
+		<script>
+			const convert = (() => {
+                // default props
+                function convertVal(val) {
+                    return typeof val === 'string' ? +val : val;
+                }
+
+                // gramsToKG
+                function gramsToKgs(weight) {
+                    return convertVal(weight) / 1000;
+                }
+                // gramsToMg
+                function gramsToMgs(weight) {
+                    return convertVal(weight) * 1000;
+                }
+                // kgsToGr
+                function kgsToG(weight) {
+                    return convertVal(weight) * 1000;
+                }
+                // kgsToMg
+                function kgsToMg(weight) {
+                    return convertVal(weight) * 1000 * 1000;
+                }
+                // mgToGr
+                function mgToG(weight) {
+                    return convertVal(weight) % 1000;
+                }
+                // mgToKg
+                function mgToKgs(weight) {
+                    return convertVal(weight) % 1000 % 1000;
+                } 
+
+                // return public methods
+                return {gramsToKgs, gramsToMgs, kgsToG, kgsToMg, mgToG, mgToKgs}
+            })();
+
+            let gramsToKgs = convert.gramsToKgs('200');
+            let gramsToMgs = convert.gramsToMgs('400');
+            let kgsToG = convert.kgsToG('300');
+            let kgsToMg = convert.kgsToMg('799');
+            let mgToG = convert.mgToG('122');
+            let mgToKgs = convert.mgToKgs('600');
+
+            console.log('gramsToKgs:', gramsToKgs);
+            console.log('gramsToMgs:', gramsToMgs);
+            console.log('kgsToG:', kgsToG);
+            console.log('kgsToMg:', kgsToMg);
+            console.log('mgToG:', mgToG);
+            console.log('mgToKgs:', mgToKgs);            
+		</script>
+	</body>
+</html>

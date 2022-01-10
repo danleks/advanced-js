@@ -23,40 +23,66 @@
 		<script>
 			const convert = (() => {
                 // default props
-                function convertVal(val) {
-                    return typeof val === 'string' ? +val : val;
+                /**
+                 * Check if provided value is number or could be number
+                 * @param {any} val Provided value
+                 */
+                function correctVal(val) {
+                    return isFinite(val);
                 }
 
-                // gramsToKG
+                /**
+                 * Grams to Kilograms (grams % 1000)
+                 * @param {any} weight The starting weight as any val
+                 */
                 function gramsToKgs(weight) {
-                    return convertVal(weight) / 1000;
+                    return correctVal(weight) === true ? correctVal(weight) / 1000 : 'wrong val';
                 }
-                // gramsToMg
+                /**
+                 * Grams to Milligrams (grams x 1000)
+                 * @param {any} weight The starting weight as any val
+                 */
                 function gramsToMgs(weight) {
-                    return convertVal(weight) * 1000;
+                    return correctVal(weight) === true ? correctVal(weight) * 1000 : 'wrong val';
                 }
-                // kgsToGr
+                /**
+                 * Kilograms to Grams (kg x 1000)
+                 * @param {any} weight The starting weight as any val
+                 */
                 function kgsToG(weight) {
-                    return convertVal(weight) * 1000;
+                    return correctVal(weight) === true ? correctVal(weight) * 1000 : 'wrong val';
                 }
-                // kgsToMg
+                /**
+                 * Kilograms to Milligrams (kg x 1000 x 1000)
+                 * @param {any} weight The starting weight as any val
+                 */
                 function kgsToMg(weight) {
-                    return convertVal(weight) * 1000 * 1000;
+                    return correctVal(weight) === true ? correctVal(weight) * 1000 * 1000 : 'wrong val';
                 }
-                // mgToGr
+                /**
+                 * Milligrams to Grams (mg % 1000)
+                 * @param {any} weight The starting weight as any val
+                 */
                 function mgToG(weight) {
-                    return convertVal(weight) % 1000;
+                    return correctVal(weight) === true ? correctVal(weight) % 1000 : 'wrong val';
                 }
-                // mgToKg
+                /**
+                 * Milligrams to Kilograms (mg % 1000 % 1000)
+                 * @param {any} weight The starting weight as any val
+                 */
                 function mgToKgs(weight) {
-                    return convertVal(weight) % 1000 % 1000;
+                    return correctVal(weight) === true ? correctVal(weight) % 1000 % 1000 : 'wrong val';
                 } 
+                /**
+                 * Convert Grams to Kilograms (grams % 1000)
+                 * @param {any} weight The starting weight as a number
+                 */
 
                 // return public methods
                 return {gramsToKgs, gramsToMgs, kgsToG, kgsToMg, mgToG, mgToKgs}
             })();
 
-            let gramsToKgs = convert.gramsToKgs('200');
+            let gramsToKgs = convert.gramsToKgs('400');
             let gramsToMgs = convert.gramsToMgs('400');
             let kgsToG = convert.kgsToG('300');
             let kgsToMg = convert.kgsToMg('799');

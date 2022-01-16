@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Convert Weight Library - Chaining</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<style type="text/css">
+			body {
+				margin: 0 auto;
+				max-width: 40em;
+				width: 88%;
+			}
+		</style>
+	</head>
+	<body>
+
+		<h1>Convert Weight Library - Chaining</h1>
+
+		<p>All of the magic here happens in the console.</p>
+
+
+		<script>
+			let Convert = (function () {
+
+				/**
+				 * The Constructor object
+				 * @param {Number} weight The weight
+				 */
+				function Constructor (weight) {
+					this.weight = weight;
+				}
+
+                /**
+				 * Add weight in Mg
+				 * @return {Object} Object with the weight property
+				 */
+                Constructor.prototype.addMg = function(weight) {
+                    this.weight += weight;
+                    return this;
+                };
+
+                /**
+				 * Convert grams to Mg and add
+				 * @return {Object} Object with the weight property
+				 */
+                Constructor.prototype.addGrams = function(weight) {
+                    this.weight += this.weight * 1000;
+                    return this;
+                };
+
+                /**
+				 * Convert kg to Mg and add
+				 * @return {Object} Object with the weight property
+				 */
+                Constructor.prototype.addKg = function(weight) {
+                    this.weight += this.weight * 1000 * 1000;
+                    return this;
+                };
+
+				/**
+				 * Get weight in milligrams
+				 * @return {Number} The weight in milligrams
+				 */
+				Constructor.prototype.inMg = function () {
+					return this.weight;
+				};
+
+				/**
+				 * Get weight in grams
+				 * @return {Number} The weight in grams
+				 */
+				Constructor.prototype.inGrams = function () {
+					return this.weight / 1000;
+				};
+
+				/**
+				 * Get weight in kilograms
+				 * @return {Number} The weight in kilograms
+				 */
+				Constructor.prototype.inKg = function () {
+					return this.weight / 1000 / 1000;
+				};
+
+				return Constructor;
+
+			})();
+
+			// Create a new instance
+            let hummingbird = new Convert(4000);
+
+            // Add some weight and get the new value in grams
+            let afterEating = hummingbird.addMg(150).addGrams(1).inGrams()
+
+            console.log(afterEating);
+		</script>
+	</body>
+</html>

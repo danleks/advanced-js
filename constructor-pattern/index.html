@@ -21,13 +21,29 @@
 
 
 		<script>
-			const Weight = (() => {
+			const Convert = (() => {
+                function weightToMg(unit, weight) {
+                    if (unit === 'g') return weight * 1000;
+                    if (unit === 'kg') return weight * 1000 * 1000;
+                    return weight;
+                }
                 /**
                  * The Constructor object
                  * @param {Number} weight The starting weight
+                 * 
                 */
-                function Constructor(weight) {
-                    this.weight = weight;
+                function Constructor(weight, options = {}) {
+
+                    let settings = Object.assign({
+                        unit: 'mg'
+                    }, options);
+
+                    if(!['mg', 'kg', 'g'].includes(settings.unit)) {
+                        throw 'Wrong unit';
+                    }
+
+                    this.weight = weightToMg(settings.unit, weight);
+
                 }
 
                 Constructor.prototype.inGrams = function() {
@@ -45,21 +61,21 @@
                 return Constructor;
             })();
 
-            let hummingbird = new Weight(4000);
-
-            // returns 4
-            let grams = hummingbird.inGrams();
-
-            // returns 0.004
+            // Create a new instance in grams
+            let hummingbird = new Convert(4, {
+                unit: 'g'
+            });
             let kg = hummingbird.inKg();
-
-            // returns 4000
-            let mg = hummingbird.inMg();
-
-            console.log(grams);
             console.log(kg);
-            console.log(mg);
+            // Create an instance with the default milligrams
+            let bumbleBee = new Convert(150);
+            let g = bumbleBee.inGrams();
+            console.log(g);
 
+            // When completed, a developer using the library 
+            // should be able to crew a Convert() instance
+            // using mg, grams, or kg. 
+            // The library should default to mg if no units option is provided.
 		</script>
 	</body>
 </html>
